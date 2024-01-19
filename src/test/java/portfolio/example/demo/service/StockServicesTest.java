@@ -12,6 +12,7 @@ import portfolio.example.demo.repository.StockRepository;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ActiveProfiles("first_test")
 @SpringBootTest
@@ -42,6 +43,10 @@ class StockServicesTest {
 
     @Test
     void StocksDetailsWithInValidStockId(){
+
+            long inValidId = 50032590;
+            Optional<Stock> optionalStock = stockServices.getStockDetailById(inValidId);
+            assertTrue(optionalStock.isEmpty());
 
     }
 
