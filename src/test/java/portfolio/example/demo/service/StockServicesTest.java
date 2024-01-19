@@ -44,7 +44,7 @@ class StockServicesTest {
     @Test
     void StocksDetailsWithInValidStockId(){
 
-            long inValidId = 50032590;
+            long inValidId = 123;
             Optional<Stock> optionalStock = stockServices.getStockDetailById(inValidId);
             assertTrue(optionalStock.isEmpty());
 
