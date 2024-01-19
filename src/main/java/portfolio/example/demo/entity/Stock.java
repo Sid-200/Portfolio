@@ -13,6 +13,7 @@ import lombok.*;
 @Entity
 @Table(name = "stocks")
 @Getter
+@Setter
 public class Stock {
     @Id
     private long stockId;
@@ -30,6 +31,7 @@ public class Stock {
     private long numberOfTrades;
     private long numberOfStocks;
     private long netTurnOver;
+
 
 
 }

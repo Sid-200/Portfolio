@@ -1,31 +1,49 @@
 package portfolio.example.demo.service;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import portfolio.example.demo.entity.Stock;
 import portfolio.example.demo.repository.StockRepository;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ActiveProfiles("first_test")
+@SpringBootTest
 class StockServicesTest {
+
     @Autowired
-    StockServices stockServices;
+    private StockServices stockServices;
+
     @Autowired
-    StockRepository stockRepository;
+    private StockRepository stockRepository;
+
+    @BeforeEach
+    void setup() {
+        Stock stock = new Stock(12, "apple", "A", "A", 23.3, 25.49, 20.9, 24.34, 24.14, 22.34, 576, 14819, 4133);
+        stockRepository.save(stock);
+    }
+    @AfterEach
+    void tearDown() {
+        stockRepository.deleteAll();
+    }
     @Test
-    void  showStockDetailsWithValidStockId(){
-        long stockId=500002;
-        Optional<Stock> optionalStock=stockServices.getStockDetailById(stockId);
+    void StockDetailsWithValidStockId() {
+        long stockId = 12;
+        Optional<Stock> optionalStock = stockServices.getStockDetailById(stockId);
         Stock stock = optionalStock.get();
         assertEquals(stock.getStockId(), stockId);
     }
-//    @Test
-//    void expectStockDetailsWhenValidStockIdIsGiven() {
-//        int stockId = 500032;
-//        Optional<Stock> optionalStock = stockService.getStockDetails(stockId);
-//        Stock stock = optionalStock.get();
-//        assertEquals(stock.getId(), stockId);
-//    }
+
+    @Test
+    void StocksDetailsWithInValidStockId(){
+
+    }
+
+
 }
