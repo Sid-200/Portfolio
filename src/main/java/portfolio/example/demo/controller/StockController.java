@@ -17,7 +17,7 @@ public class StockController {
     @Autowired
     private StockServices stockServices;
     @PostMapping("/upload")
-    ResponseEntity<String>fileUpload(@RequestBody MultipartFile file ){
+   private ResponseEntity<String>fileUpload(@RequestBody MultipartFile file ){
         if(file.isEmpty()){
             return ResponseEntity.badRequest().body("please upload file");
         }
@@ -27,7 +27,7 @@ public class StockController {
         }
     }
     @GetMapping("/details/{stockId}")
-    ResponseEntity<Response<Stock>>stockDetails(@PathVariable("stockId") Long stockId){
+  private  ResponseEntity<Response<Stock>>stockDetails(@PathVariable("stockId") Long stockId){
         Optional<Stock> optionalStock = stockServices.getStockDetailById(stockId);
 
         if (optionalStock.isEmpty()) {
